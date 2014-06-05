@@ -1,0 +1,80 @@
+/* Space out content a bit */
+body {
+  padding-top: 0px;
+  padding-bottom: 20px;
+}
+
+#welkomtekst
+{
+    text-align: center;
+    color: #fedf00;
+}
+
+#mainrow
+{
+    border: 1px solid;
+    border-color: #009b3a;
+    border-radius: 25px;;
+    background-color: #009b3a;
+    padding-bottom: 20px;
+}
+
+.wkbutton
+{
+    background-color: #002776;
+    color: #fedf00;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary
+{
+    background-color: #fedf00;
+    color: #002776;
+}
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+#entireApp
+{
+    background-color: #009b3a;;
+}
+
+/* Customize container */
+@media (min-width: 1280px) {
+  .container {
+
+  }
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+
