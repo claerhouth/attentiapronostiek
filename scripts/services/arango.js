@@ -11,15 +11,18 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.put('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/_api/simple/all', {"collection": "businessunits"}).success(callback);
+        $http.get('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/businessunits').success(callback);
 
         return deferred.promise;
      };
 
     factory.registerUser = function(gebruiker)
     {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
 
-        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/_api/document?collection=gebruikers',
+
+        $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/user',
             {gebruikersnaam: gebruiker.nieuwegebruiker,
              email: gebruiker.email,
              wachtwoord: gebruiker.nieuwwachtwoord,
@@ -27,17 +30,151 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
              naam: gebruiker.naam,
              buId: gebruiker.buId
               }).success(callback);
-        return true;
-    }
+
+        return deferred.promise;
+    };
 
     factory.getUser = function(gebruiker)
     {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.put('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/_api/simple/by-example',
-            {"collection": "gebruikers", "example" : { "gebruikersnaam" : gebruiker.gebruikersnaam }
-            }).success(callback);
+        $http.get('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/user/' + gebruiker.gebruikersnaam ).success(callback);
+
+        return deferred.promise;
+    };
+
+    factory.authenticateUser = function(gebruiker)
+        {
+            var deferred = $q.defer();
+            var callback = function(result) { deferred.resolve(result) };
+
+            $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/auth/',
+                { gebruikersnaam: gebruiker.gebruikersnaam,
+                    wachtwoord: gebruiker.wachtwoord }
+
+            ).success(callback);
+
+            return deferred.promise;
+        };
+
+    factory.isUserAdmin = function(gebruiker)
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/auth/',
+            { gebruikersnaam: gebruiker
+                 }
+
+        ).success(callback);
+
+        return deferred.promise;
+    };
+
+    factory.getSpelfase = function()
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        $http.get('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/spelfase/').success(callback);
+
+        return deferred.promise;
+    }
+
+    factory.getGroepen = function(spelfase)
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        $http.get('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/groep/' + spelfase).success(callback);
+
+        return deferred.promise;
+    };
+
+    factory.getMatchen = function(groepen)
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        var groepids = [];
+        var index = 0;
+
+        for(index; index < groepen.length; index++)
+        {
+            groepids.push(groepen[index].attributes.groepId);
+        }
+
+
+        $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/match/',{ groep: groepids} ).success(callback);
+
+
+        return deferred.promise;
+    };
+
+    factory.getLanden = function()
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        $http.get('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/land/').success(callback);
+
+        return deferred.promise;
+    }
+
+
+    factory.savePronostiek = function(prono)
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/pronostiek/',
+            {  "gebruikersnaam": prono.gebruikersnaam,
+                "matchResultaten": prono.matchResultaat,
+                "land": prono.land}).success(callback);
+
+        return deferred.promise;
+    }
+
+    factory.getPronostiek= function(gebruikersnaam)
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        $http.get('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/pronostiek/' + gebruikersnaam).success(callback);
+
+        return deferred.promise;
+    }
+
+    factory.zetSpelfase = function(spelFase)
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/spelfase/',
+            { "faseId": 1, "spelfase": parseInt(spelFase) }
+        );
+
+        return deferred.promise;
+    }
+
+
+    factory.getGebruikersPunten = function(gebruikersnaam)
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/resultaten/' + gebruikersnaam).success(callback);
+
+        return deferred.promise;
+    }
+
+    factory.berekenResultaten = function()
+    {
+        var deferred = $q.defer();
+        var callback = function(result) { deferred.resolve(result) };
+
+        $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/resultaten/');
 
         return deferred.promise;
     }

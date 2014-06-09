@@ -4,12 +4,21 @@ angular.module('attentiaPronostiekApp')
   .factory('authent', function authent($q, arango) {
         // AngularJS will instantiate a singleton by calling "new" on this function
         var isUserAuthenticated = false;
+        var authenticatedUser = "";
+        var isUserAdmin = false;
 
         var factory = {};
+
+        factory.isUserAdmin = function () { return isUserAdmin };
 
         factory.isUserAuthenticated = function()
         {
             return isUserAuthenticated;
+        }
+
+        factory.authenticatedUser = function()
+        {
+            return authenticatedUser;
         }
 
         factory.authenticateUser = function (gebruiker) {
@@ -18,21 +27,31 @@ angular.module('attentiaPronostiekApp')
             var deferred = $q.defer();
             var callback = function (result) { deferred.resolve(result)};
 
-            arango.getUser(gebruiker).then(callback);
+            arango.authenticateUser(gebruiker).then(callback);
 
             return deferred.promise.then(function(result) {
 
-                    if (result.result[0].wachtwoord == gebruiker.wachtwoord) {
+                    if(result.error)
+                    {
+
+                        isUserAuthenticated = false;
+                    }
+                    else
+                    {
+                        authenticatedUser = gebruiker.gebruikersnaam;
+                        isUserAdmin = result.admin;
                         isUserAuthenticated = true;
-                        return true;
                     }
-                    else {
-                        return false;
-                    }
+                    return result
                 }
             );
 
 
+        }
+
+        factory.logout = function()
+        {
+            isUserAuthenticated = false;
         }
 
 

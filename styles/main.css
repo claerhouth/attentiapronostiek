@@ -19,8 +19,40 @@ body {
     padding-bottom: 20px;
 }
 
+.landIcon
+{
+    width: 60px;
+    height: 40px;
+}
+
+.errorlabel
+{
+    color: darkred;
+}
+.centerdiv
+{
+    text-align: center;
+}
+
+.inputmatch
+{
+    width: 20px;
+    text-align:center;
+}
+
+.labelLogin
+{
+    color: #fedf00
+}
+
+.labelLand
+{
+    width:150px;
+}
+
 .wkbutton
 {
+    margin-top: 10px;
     background-color: #002776;
     color: #fedf00;
 }

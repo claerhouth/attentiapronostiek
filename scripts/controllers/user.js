@@ -9,10 +9,20 @@ angular.module('attentiaPronostiekApp')
         {
             var ok = arango.registerUser($scope.gebruiker);
 
-            if(ok)
-                $location.path("/mijnpronostiek");
-            else
-                $scope.registerErrorMessage = "Gebruikersnaam bestaat al";
+            ok.then(function (result) {
+                    console.log(result);
+                    if(result.error )
+                    {
+                        $scope.registerErrorMessage = result.error;
+                    }
+                    else
+                    {
+                        $scope.gebruiker.gebruikersnaam = $scope.gebruiker.nieuwegebruiker;
+                        $scope.gebruiker.wachtwoord = $scope.gebruiker.nieuwwachtwoord;
+
+                        authent.authenticateUser($scope.gebruiker).then(function (success) { $location.path("/mijnpronostiek");});
+
+                    }});
         }
 
 
@@ -21,17 +31,19 @@ angular.module('attentiaPronostiekApp')
             authent.authenticateUser($scope.gebruiker).then(function (success)
             {
                 console.log(success);
-                if(success)
+                if(success.error)
                 {
-                    $location.path("/mijnpronostiek");
+                    console.log("succes");
+                    $scope.loginErrorMessage = success.error;
                 }
                 else
                 {
-                    $scope.loginErrorMessage = "Ongeldige gebruikersnaam of wachtwoord";
+                    $location.path("/mijnpronostiek");
+
                 }
             });
         }
 
-        arango.getBusinessUnits().then(function(result) { $scope.businessunits = result.result});
+        arango.getBusinessUnits().then(function(result) { $scope.businessunits = result});
 
   });

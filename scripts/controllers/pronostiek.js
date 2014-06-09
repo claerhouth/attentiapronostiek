@@ -1,35 +1,198 @@
 'use strict';
 
 angular.module('attentiaPronostiekApp')
-  .controller('PronostiekCtrl', function ($scope,$location ,authent, arango) {
+  .controller('PronostiekCtrl', function ($scope,$location,$filter ,authent, arango) {
+
+        var landen = new Array();
+        var groepen;
+        var matchen = [];
+        var matchtype = "P";
 
             if (!authent.isUserAuthenticated())
             {
                 $location.path("/");
             }
-
-            function initPronostiek(pronostiek)
+            else if(authent.isUserAdmin())
             {
-                if(pronostiek == null)
-                {
-                    arango.getWedstrijden().then(function (result) maakpronostiek(result.result));
-                }
-                else
-                {
-                    $scope.pronostiek = pronostiek;
-                }
+                $scope.isAdmin = true;
+                matchtype = "R";
             }
 
-            function maakPronostiek(wedstrijden)
+            $scope.zetSpelfase = function()
+            {
+                arango.zetSpelfase($scope.spelfase);
+            };
+
+
+            $scope.initPronostiek = function(gemaaktepronostiek)
+            {
+
+                arango.getLanden().then(function (result) {
+                        $scope.landen = [];
+                        result.forEach (function(land) {
+                            landen[land.attributes.landId] = land.attributes;
+
+                            $scope.landen.push(land.attributes);
+                        });
+
+                    });
+
+                    arango.getSpelfase()
+                        .then(function (spelfase) { arango.getGroepen(spelfase[0].attributes.spelfase)
+                        .then(function (result) { groepen = result; arango.getMatchen(result)
+                                .then(function (result) {
+                                var matchencoll= result.matchen;
+
+                                  matchencoll.forEach(function (matches)
+                                  {
+                                     matches.forEach(function (innermatch){
+
+                                          matchen.push(innermatch);
+                                      });
+                                  }); $scope.maakPronostiek(gemaaktepronostiek); })
+                        })
+                        });
+            };
+
+            $scope.maakPronostiek = function(gemaaktepronostiek)
+            {
+
+
+                var usermatchGroepen = [];
+
+                groepen= groepen.sort(function(a,b) {return a.attributes.groepId > b.attributes.groepId});
+
+                groepen.forEach(function(groep)
+                {
+                    var groepmatchen = $filter('groepFilter')(matchen, groep.attributes.groepId);
+                    var userMatchGroep = [];
+
+                    var filter = true;
+
+                    if(gemaaktepronostiek.length > 0)
+                    {
+                        filter = !$filter('pronostiekFilter')(gemaaktepronostiek[0].attributes.matchResultaten, groep.attributes.groepNaam)
+                    }
+
+                    if(filter)
+                    {
+
+                        $scope.showButton = true;
+
+
+                        groepmatchen.sort(function(a,b){ return a.attributes.tijdstip > b.attributes.tijdstip}).forEach(function(match)
+                        {
+
+
+                            var usermatch = {};
+                            usermatch.matchId = match.attributes.matchId;
+                            usermatch.groep = groep.attributes.groepNaam;
+                            usermatch.landA = landen[match.attributes.landA].landNaam;
+                            usermatch.landB = landen[match.attributes.landB].landNaam;
+                            usermatch.resultaatA = 0;
+                            usermatch.resultaatB = 0;
+
+                            usermatch.type = matchtype;
+
+                            userMatchGroep.push(usermatch);
+                        });
+                        usermatchGroepen.push({ naam: groep.attributes.groepNaam, groep: userMatchGroep });
+                    }
+
+                });
+
+                if(gemaaktepronostiek.length > 0)
+                {
+                    $scope.gekozenLand = gemaaktepronostiek[0].attributes.land;
+                    var vulGroep = {};
+                    vulGroep.naam= "Vorige pronostieken";
+                    vulGroep.groep= [];
+                    usermatchGroepen.push(vulGroep);
+
+                    var bestaandeGroepen = [];
+
+                    gemaaktepronostiek[0].attributes.matchResultaten.forEach( function (match) {
+
+                        if(authent.isUserAdmin())
+                        {
+                            match.disabled = false;
+                        }
+                        else
+                        {
+                            match.disabled = true;
+                        }
+
+                        if(!bestaandeGroepen[match.groep])
+                        {
+                            bestaandeGroepen[bestaandeGroepen.length] = match.groep;
+                            bestaandeGroepen[match.groep] = { naam: match.groep, groep: []}
+                        }
+
+                        bestaandeGroepen[match.groep].groep.push(match);
+                    });
+
+                    var index = 0;
+
+                    bestaandeGroepen.sort();
+
+                    for(index; index < bestaandeGroepen.length; index++)
+                    {
+                        usermatchGroepen.push(bestaandeGroepen[bestaandeGroepen[index]]);
+                    }
+                }
+
+
+                $scope.userMatchGroepen = usermatchGroepen;
+
+                if(authent.isUserAdmin())
+                {
+                    $scope.showButton = true;
+                }
+            };
+
+            $scope.savePronostiek = function ()
             {
                 var pronostiek = {};
-                for(var w in wedstrijden)
-                {
 
-                }
+                pronostiek.land = $scope.gekozenLand;
+                console.log(pronostiek.land);
+                pronostiek.matchResultaat = [];
+                pronostiek.gebruikersnaam = authent.authenticatedUser();
+
+                var matchGroepen = $scope.userMatchGroepen;
+
+                 matchGroepen.forEach(function(matchen)
+                 {
+                     matchen.groep.forEach(function(usermatch)
+                     {
+
+                         if(usermatch.resultaatA == usermatch.resultaatB)
+                         {
+                         usermatch.voorspelling = "=";
+                         }
+                         else if(usermatch.resultaatA > usermatch.resultaatB)
+                         {
+                         usermatch.voorspelling = "1";
+                         }
+                         else
+                         {
+                         usermatch.voorspelling = "2";
+                         }
+
+                         pronostiek.matchResultaat.push(usermatch);
+                     });
+                 });
+
+                arango.savePronostiek(pronostiek).then(function() { arango.getPronostiek(authent.authenticatedUser()).then(function(result) {
+                    $scope.showButton = false; $scope.initPronostiek(result) }); });
+            };
+
+            $scope.berekenResultaten = function()
+            {
+                arango.berekenResultaten();
             }
 
-            arango.getPronostiek().then(function(result) { initPronostiek(result.result) });
+            arango.getPronostiek(authent.authenticatedUser()).then(function(result) { $scope.initPronostiek(result) });
     });
 
 

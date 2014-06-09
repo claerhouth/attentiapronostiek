@@ -8,16 +8,20 @@
     <div class="row-fluid col-md-5">
         <form name="logon" ng-controller="UserCtrl" ng-submit="login()">
             <div class="row-fluid">
-                <input ng-required="true" type="text" class="col-md-12" ng-model="gebruiker.gebruikersnaam" placeholder="Gebruikersnaam"/>
+                <label class="col-md-6 labelLogin"> Gebruikersnaam:</label>
+                <input ng-required="true" type="text" class="col-md-6" ng-model="gebruiker.gebruikersnaam" placeholder="Gebruikersnaam"/>
             </div>
 
             <div class="row-fluid">
-                <input ng-required="true" type="text" class="col-md-12" ng-model="gebruiker.wachtwoord" placeholder="Wachtwoord"/>
+                <label class="col-md-6 labelLogin"> Wachtwoord:</label>
+                <input ng-required="true" type="password" class="col-md-6" ng-model="gebruiker.wachtwoord" placeholder="Wachtwoord"/>
             </div>
 
             <div class="row-fluid">
-                <button type="submit" ng-disabled="logon.$invalid" class="btn btn-primary col-md-12 wkbutton">Log in als bestaande gebruiker</button>
+                <label class="col-md-6"> </label>
+                <button type="submit" ng-disabled="logon.$invalid" class="btn btn-primary col-md-6 wkbutton">Log in als bestaande gebruiker</button>
             </div>
+            <p class="errorlabel">{{loginErrorMessage}}</p>
         </form>
     </div>
 
@@ -30,38 +34,43 @@
 
     <div class="row-fluid col-md-6">
         <form name="reg" ng-controller="UserCtrl" ng-submit="registerUser()">
-            <div class="row-fluid">
-                <input  ng-required="true" class="col-md-12" type="text" placeholder="Kies een gebruikersnaam"  ng-model="gebruiker.nieuwegebruiker"/>
+            <div class="row-fluid ">
+                <label class="col-md-6 labelLogin"> Gebruikersnaam: </label>
+                <input  ng-required="true" class="col-md-6" maxlength="10" type="text" placeholder="10 karakters"  ng-model="gebruiker.nieuwegebruiker"/>
             </div>
 
-            <div class="row-fluid">
-                <input  ng-required="true" class="col-md-12" type="text" placeholder="Kies een wachtwoord"  ng-model="gebruiker.nieuwwachtwoord"/>
+            <div class="row-fluid ">
+                <label class="col-md-6 labelLogin "> Wachtwoord: </label>
+                <input  ng-required="true" class="col-md-6" maxlength="8" type="password" placeholder="8 karakters"  ng-model="gebruiker.nieuwwachtwoord"/>
+
             </div>
 
-            <div class="row-fluid">
-                <input  ng-required="true" class="col-md-12" type="text" placeholder="Voornaam"  ng-model="gebruiker.voornaam"/>
+            <div class="row-fluid ">
+                <label class="col-md-6 labelLogin"> Voornaam: </label>
+                <input  ng-required="true" class="col-md-6" maxlength="20" type="text" placeholder="Voornaam"  ng-model="gebruiker.voornaam"/>
             </div>
 
-            <div class="row-fluid">
-                <input  ng-required="true" class="col-md-12" type="text" placeholder="Naam" ng-model="gebruiker.naam" />
+            <div class="row-fluid ">
+                <label class="col-md-6 labelLogin"> Naam:</label>
+                <input  ng-required="true" class="col-md-6" maxlength="20" type="text" placeholder="Naam" ng-model="gebruiker.naam" />
             </div>
 
-            <div class="row-fluid">
-                <input  ng-required="true" class="col-md-12" type="text" placeholder="E-mail" ng-model="gebruiker.email" />
+            <div class="row-fluid ">
+                <label class="col-md-6 labelLogin"> E-mail: </label>
+                <input  type="email" ng-required="true" class="col-md-6" maxlength="100" type="text" placeholder="nieuwegebruiker@attentia.be" ng-model="gebruiker.email"  />
             </div>
 
-            <div class="row-fluid">
-                <select ng-model="gebruiker.buId" ng-options="bu.buId as bu.buNaam for bu in businessunits"  ng-required="true" class="col-md-12">
+            <div class="row-fluid ">
+                <label class="col-md-6 labelLogin"> Business unit: </label>
+                <select ng-model="gebruiker.buId" ng-options="bu.buId as bu.buNaam for bu in businessunits"  ng-required="true" class="col-md-6">
                      <option value="" ng-hide="gebruiker.buId">Kies een business-unit aub</option>
                 </select/>
             </div>
 
-
-
             <div class="row-fluid">
-                <button type="submit" ng-disabled="reg.$invalid" class="btn btn-primary col-md-12 wkbutton">Registreer je als nieuwe gebruiker</button>
+                <button type="submit" ng-disabled="reg.$invalid" class="btn btn-primary col-md-6 wkbutton">Registreer je als nieuwe gebruiker</button>
             </div>
-
+            <p class"errorlabel">{{registerErrorMessage}}</p>
         </form>
     </div>
 

@@ -4,7 +4,7 @@ angular.module('attentiaPronostiekApp', [
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngRoute',
+    'ngRoute'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -19,8 +19,12 @@ angular.module('attentiaPronostiekApp', [
             controller: 'PronostiekCtrl'
         }).when('/logout', {
             templateUrl: 'views/logout.html',
-            controller: 'MainCtrl'
+            controller: 'LogoutCtrl'
+        }).when('/resultaten', {
+            templateUrl: 'views/resultaten.html',
+            controller: 'ResultatenCtrl'
         }).otherwise({
-        redirectTo: '/404.html'
+        redirectTo: '/views/main.html'
       });
-  });
+});
+
