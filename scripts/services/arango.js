@@ -164,7 +164,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/resultaten/' + gebruikersnaam).success(callback);
+        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/resultaten/' + gebruikersnaam).success(callback);
 
         return deferred.promise;
     }
@@ -174,7 +174,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.post('http://localhost:8529/_db/AttentiaPronostiek/dev/attentiabackend/resultaten');
+        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/resultaten');
 
         return deferred.promise;
     }
