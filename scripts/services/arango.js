@@ -11,7 +11,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.get('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/businessunits').success(callback);
+        $http.get('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/businessunits').success(callback);
 
         return deferred.promise;
      };
@@ -22,7 +22,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var callback = function(result) { deferred.resolve(result) };
 
 
-        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/user',
+        $http.post('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/user',
             {gebruikersnaam: gebruiker.nieuwegebruiker,
              email: gebruiker.email,
              wachtwoord: gebruiker.nieuwwachtwoord,
@@ -39,7 +39,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.get('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/user/' + gebruiker.gebruikersnaam ).success(callback);
+        $http.get('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/user/' + gebruiker.gebruikersnaam ).success(callback);
 
         return deferred.promise;
     };
@@ -49,7 +49,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
             var deferred = $q.defer();
             var callback = function(result) { deferred.resolve(result) };
 
-            $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/auth/',
+            $http.post('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/auth/',
                 { gebruikersnaam: gebruiker.gebruikersnaam,
                     wachtwoord: gebruiker.wachtwoord }
 
@@ -63,7 +63,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/auth/',
+        $http.post('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/auth/',
             { gebruikersnaam: gebruiker
                  }
 
@@ -77,7 +77,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.get('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/spelfase/').success(callback);
+        $http.get('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/spelfase/').success(callback);
 
         return deferred.promise;
     }
@@ -87,7 +87,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.get('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/groep/' + spelfase).success(callback);
+        $http.get('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/groep/' + spelfase).success(callback);
 
         return deferred.promise;
     };
@@ -106,7 +106,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         }
 
 
-        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/match/',{ groep: groepids} ).success(callback);
+        $http.post('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/match/',{ groep: groepids} ).success(callback);
 
 
         return deferred.promise;
@@ -117,7 +117,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.get('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/land/').success(callback);
+        $http.get('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/land/').success(callback);
 
         return deferred.promise;
     }
@@ -128,7 +128,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/pronostiek/',
+        $http.post('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/pronostiek/',
             {  "gebruikersnaam": prono.gebruikersnaam,
                 "matchResultaten": prono.matchResultaat,
                 "land": prono.land}).success(callback);
@@ -141,7 +141,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.get('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/pronostiek/' + gebruikersnaam).success(callback);
+        $http.get('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/pronostiek/' + gebruikersnaam).success(callback);
 
         return deferred.promise;
     }
@@ -151,7 +151,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/spelfase/',
+        $http.post('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/spelfase/',
             { "faseId": 1, "spelfase": parseInt(spelFase) }
         );
 
@@ -164,7 +164,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/resultaten/' + gebruikersnaam).success(callback);
+        $http.post('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/resultaten/' + gebruikersnaam).success(callback);
 
         return deferred.promise;
     }
@@ -174,7 +174,7 @@ angular.module('attentiaPronostiekApp').factory('arango',function($http, $q) {
         var deferred = $q.defer();
         var callback = function(result) { deferred.resolve(result) };
 
-        $http.post('http://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/resultaten');
+        $http.post('https://attarango.cloudapp.net:8529/_db/attentiapronostiek/attentiabackend/resultaten');
 
         return deferred.promise;
     }
