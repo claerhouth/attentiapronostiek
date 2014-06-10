@@ -29,13 +29,15 @@ angular.module('attentiaPronostiekApp')
 
                 arango.getLanden().then(function (result) {
                         $scope.landen = [];
+
+
                         result.forEach (function(land) {
                             landen[land.attributes.landId] = land.attributes;
 
                             $scope.landen.push(land.attributes);
                         });
 
-
+                        $scope.landen.sort(function (a,b) { return (a.landNaam > b.landNaam) ? 1 : (b.landNaam > a.landNaam) ? -1 : 0 });
                     });
 
                     arango.getSpelfase()
