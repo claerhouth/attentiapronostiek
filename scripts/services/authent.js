@@ -38,7 +38,7 @@ angular.module('attentiaPronostiekApp')
                     }
                     else
                     {
-                        authenticatedUser = gebruiker.gebruikersnaam;
+                        authenticatedUser = gebruiker;
                         isUserAdmin = result.admin;
                         isUserAuthenticated = true;
                     }

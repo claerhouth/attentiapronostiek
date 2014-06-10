@@ -10,33 +10,37 @@
         </form>
      </div>
 </div>
-</form>
+
 
 
 <form name="pronostiek" ng-submit="savePronostiek()">
+
+    <div class="centerdiv">
+        <div class="row-fluid col-md-12 ">
+            <img src="banner.gif" />
+        </div>
+    </div>
+
 
     <div class="row-fluid col-md12" ng-repeat="group in userMatchGroepen">
         <div class="row-fluid col-md12">
             <h3 id="welkomtekst">{{group.naam}}</h3>
         </div>
 
-        <div class="centerdiv">
 
-            <div class="row-fluid col-md6 pronostiek" ng-repeat="item in group.groep">
-
+        <div class="row-fluid col-md12" ng-repeat="item in group.groep">
+             <div id="pronostiek" class="col-md-6 centerdiv">
                 <image class="landIcon" ng-src="../assets/{{item.landA}}.png" />
                 <label class="labelLand">{{item.landA}}</label>
-                <input class="inputmatch"  maxlength="2" ng-model="item.resultaatA" ng-required="true"  ng-hide="item.disabled"  />
+                <input class="inputmatch"  maxlength="2" ng-model="item.resultaatA" ng-required="true"  ng-hide="item.disabled"  pattern="0|[1-9]\d{0,2}" />
                 <label class="col-md2" ng-show="item.disabled" >{{item.resultaatA}}</label>
                 <label class="col-md2"> - </label>
-                <input class="inputmatch" maxlength="2" ng-model="item.resultaatB" ng-required="true" ng-hide="item.disabled" />
+                <input class="inputmatch" maxlength="2" ng-model="item.resultaatB" ng-required="true" ng-hide="item.disabled" pattern="0|[1-9]\d{0,2}" />
                 <label class="col-md2" ng-show="item.disabled">{{item.resultaatB}}</label>
                 <label class="labelLand">{{item.landB}}</label>
                 <image class="landIcon" ng-src="../assets/{{item.landB}}.png" />
-            </div>
+             </div>
         </div>
-
-
     </div>
 
 
@@ -44,7 +48,7 @@
 
         <div class="row-fluid col-md12">
             <label class="col-md6">Welk land wint het WK?</label>
-            <select class="col-md6" ng-model="gekozenLand"  ng-show="showButton" ng-options="land.landNaam as land.landNaam for land in landen"> </select>
+            <select class="col-md6" ng-model="gekozenLand"  ng-show="showButton" ng-options="land.landNaam as land.landNaam for land in landen | orderBy:landNaam> </select>
             <label class="col-md6" >{{gekozenLand}}</label>
         </div>
 

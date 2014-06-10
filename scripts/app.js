@@ -14,7 +14,11 @@ angular.module('attentiaPronostiekApp', [
         }).when('/home', {
             templateUrl: 'views/main.html',
             controller: 'MainCtrl'
-        }).when('/mijnpronostiek', {
+        }).when('/wedstrijdreglement', {
+            templateUrl: 'views/wedstrijdreglement.html',
+            controller: 'WedstrijdreglementCtrl'
+        })
+        .when('/mijnpronostiek', {
             templateUrl: 'views/userpronostiek.html',
             controller: 'PronostiekCtrl'
         }).when('/logout', {

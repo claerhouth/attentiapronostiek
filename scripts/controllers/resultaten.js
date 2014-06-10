@@ -17,10 +17,10 @@ angular.module('attentiaPronostiekApp')
         {
             $scope.gebruikersPunten = resultaat.punten;
             $scope.buScores = resultaat.buScores;
-            $scope.klassement = resultaat.userScores;
+            $scope.userScores = resultaat.userScores;
         };
 
-        arango.getGebruikersPunten(authent.authenticatedUser()).then(function(result) {$scope.initResultaat(result)});
+        arango.getGebruikersPunten(authent.authenticatedUser().gebruikersnaam).then(function(result) {$scope.initResultaat(result)});
 
 
 

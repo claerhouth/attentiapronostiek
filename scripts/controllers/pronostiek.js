@@ -35,6 +35,7 @@ angular.module('attentiaPronostiekApp')
                             $scope.landen.push(land.attributes);
                         });
 
+
                     });
 
                     arango.getSpelfase()
@@ -157,7 +158,7 @@ angular.module('attentiaPronostiekApp')
                 pronostiek.land = $scope.gekozenLand;
                 console.log(pronostiek.land);
                 pronostiek.matchResultaat = [];
-                pronostiek.gebruikersnaam = authent.authenticatedUser();
+                pronostiek.gebruikersnaam = authent.authenticatedUser().gebruikersnaam;
 
                 var matchGroepen = $scope.userMatchGroepen;
 
@@ -183,16 +184,17 @@ angular.module('attentiaPronostiekApp')
                      });
                  });
 
-                arango.savePronostiek(pronostiek).then(function() { arango.getPronostiek(authent.authenticatedUser()).then(function(result) {
+                arango.savePronostiek(pronostiek).then(function() { arango.getPronostiek(authent.authenticatedUser().gebruikersnaam).then(function(result) {
                     $scope.showButton = false; $scope.initPronostiek(result) }); });
             };
 
             $scope.berekenResultaten = function()
             {
+                console.log("Resultaten");
                 arango.berekenResultaten();
             }
 
-            arango.getPronostiek(authent.authenticatedUser()).then(function(result) { $scope.initPronostiek(result) });
+            arango.getPronostiek(authent.authenticatedUser().gebruikersnaam).then(function(result) { $scope.initPronostiek(result) });
     });
 
 

@@ -7,9 +7,12 @@ angular.module('attentiaPronostiekApp')
 
         $scope.registerUser = function ()
         {
-            var ok = arango.registerUser($scope.gebruiker);
 
-            ok.then(function (result) {
+            if($scope.gebruiker.nieuwegebruiker.indexOf("@attentia.be") !== -1)
+            {
+                var ok = arango.registerUser($scope.gebruiker);
+
+                ok.then(function (result) {
                     console.log(result);
                     if(result.error )
                     {
@@ -23,6 +26,12 @@ angular.module('attentiaPronostiekApp')
                         authent.authenticateUser($scope.gebruiker).then(function (success) { $location.path("/mijnpronostiek");});
 
                     }});
+            }
+            else
+            {
+                $scope.registerErrorMessage = "Je moet een geldig attentia e-mail adres opgeven!"
+            }
+
         }
 
 
