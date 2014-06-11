@@ -25,19 +25,22 @@
     <![endif]-->
 
 
-    <nav class="navbar navbar-default" role="navigation">
+    <nav class="navbar navbar-default" role="navigation"  ng-controller="MainCtrl">
 
         <ul class="nav navbar-nav">
             <li><img class="navbar navbar-header" src="../logo_homepage.gif" /></li>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#wedstrijdreglement">Wedstrijdreglement</a></li>
-            <li><a href="#mijnpronostiek">Mijn pronostiek</a></li>
+            <li><a href="#home">{{'HOME' | translate}}</a></li>
+            <li><a href="#wedstrijdreglement">{{'WEDSTRIJDREGLEMENT' | translate }}</a></li>
+            <li><a href="#mijnpronostiek">{{'MIJNPRONOSTIEK' | translate }}</a></li>
             <!--<li><a href="#resultaten">Resultaten</a></li>-->
-            <li><a href="#logout">Uitloggen</a></li>
+            <li><a href="#logout">{{'LOGOUT' | translate }}</a></li>
+
         </ul>
-
+           <select class="navbar-right nobackground" ng-change="zetTaal()" ng-model ="taal">
+               <option>nl</option>
+               <option>fr</option>
+           </select>
     </nav>
-
 
     <!-- Add your site or application content here -->
     <div class="container" ng-view="">
@@ -69,6 +72,7 @@
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

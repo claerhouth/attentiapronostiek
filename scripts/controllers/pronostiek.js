@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('attentiaPronostiekApp')
-  .controller('PronostiekCtrl', function ($scope,$location,$filter ,authent, arango) {
+  .controller('PronostiekCtrl', function ($scope,$location,$filter,$translate ,authent, arango) {
 
         var landen = new Array();
         var groepen;
@@ -108,7 +108,7 @@ angular.module('attentiaPronostiekApp')
                 {
                     $scope.gekozenLand = gemaaktepronostiek[0].attributes.land;
                     var vulGroep = {};
-                    vulGroep.naam= "Vorige pronostieken";
+                    $translate('VORIGE_PRONOSTIEKEN').then(function (translation) { vulGroep.naam = translation });
                     vulGroep.groep= [];
                     usermatchGroepen.push(vulGroep);
 

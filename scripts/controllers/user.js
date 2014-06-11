@@ -5,6 +5,9 @@ angular.module('attentiaPronostiekApp')
 
         $scope.gebruiker = {};
 
+
+
+
         $scope.registerUser = function ()
         {
 

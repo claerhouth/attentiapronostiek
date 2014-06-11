@@ -8,10 +8,6 @@
  * Controller of the attentiaPronostiekApp
  */
 angular.module('attentiaPronostiekApp')
-  .controller('WedstrijdreglementCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('WedstrijdreglementCtrl', function ($scope, $translate) {
+    $scope.isNL = ($translate.use() == 'nl')
   });

@@ -35,6 +35,15 @@ body {
 
 }
 
+.nobackground
+{
+    background-color: transparent;
+    border-width: 0px;
+    color: #002776;
+}
+
+
+
 .landIcon
 {
     width: 60px;

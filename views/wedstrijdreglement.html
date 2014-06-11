@@ -1,11 +1,12 @@
-
 <div class="centerdiv">
     <div class="row-fluid col-md-12 ">
         <img src="banner.gif" />
     </div>
 </div>
 
-<div>
+
+<div ng-show="isNL">
+
     <b>Hoe werkt deze pronostiek?</b><br/><br/>
     <p>
     Eens je geregistreerd bent kun je jezelf aanmelden. Dit gebeurt ook automatisch na de registratie.
@@ -37,4 +38,37 @@
 
     Veel succes met je pronostiek!
 
+</div>
+<div ng-hide="isNL">
+
+
+    <b>Comment fonctionne ce pronostique ?</b><br/><br/>
+    <p>
+    Une fois enregistré, vous avez la possibilité de vous connecter. Ceci s’effectue automatiquement après l’enregistrement qui donne accès à la rubrique ‘mon pronostique ‘.<br/>
+    Le but est de donner le résultat pour chaque match qui est présenté.<br/>
+    A la fin du pronostique, il faut indiquer votre prétendant au titre de  champion du monde. Une bonne prédiction du gagnant donnera droit un grand bonus à la fin du concours !<br/>
+    Une fois votre pronostique complété entièrement, il est important de le sauvegarder en cliquant sur ‘enregistrer mon pronostique’.<br/><br/>
+
+    ATTENTION ! En cliquant sur enregistrer , le pronostique est sauvegarder de manière définitive et ne peut être modifié !</br>
+    </p>
+
+    <b>Comment obtenir des points ?</b><br/> <br/>
+    <p>
+        Pour chaque match, il y a un maximum de 3 points à gagner :
+        <ul>
+            <li>1 point pour avoir pronostiqué correctement l’équipe victorieuse</li>
+            <li>1 point pour avoir pronostiqué correctement un match nul</li>
+            <li>2 points pour le score exact de la partie</li>
+        </ul>
+    </p>
+
+    Après la phase de groupe, les premiers points seront  calculés et un classement indiquera la place de chacun des participants
+    dans le classement général, ainsi que la position dans son propre BU.<br/>
+
+    Il y a également un  classement entre BU’s : le calcul de la moyenne des points obtenus  par chaque BU sera calculé.<br/>
+
+    A partir des 1/8 de finale, les matchs éliminatoires seront également disponibles pour effectuer des pronostiques via le champs ‘Mon pronostique’.<br/>
+    Ainsi, le concours continuera jusqu’à la finale de la coupe du monde.<br/><br/>
+
+    Bonne chance et à vos pronostiques !
 </div>
