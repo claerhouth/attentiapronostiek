@@ -8,7 +8,7 @@
 <div id="mainrow" class="row-fluid col-md-12">
 
     <div class="row-fluid col-md-5">
-        <form name="logon" ng-controller="UserCtrl" ng-submit="login()">
+        <form name="logon" class="row-fluid col-md-12" ng-controller="UserCtrl" ng-submit="login()">
             <div class="row-fluid col-m-12">
                 <label class="col-md-6 labelLogin"> {{'EMAIL' |translate}}:</label>
                 <input ng-required="true" type="text" class="col-md-6" ng-model="gebruiker.gebruikersnaam" placeholder="{{'EMAILATT' |translate}}"/>
@@ -37,7 +37,7 @@
     </div>
 
     <div class="row-fluid col-md-6">
-        <form name="reg" ng-controller="UserCtrl" ng-submit="registerUser()">
+        <form name="reg" ng-controller="UserCtrl"  class="row-fluid col-md-12" ng-submit="registerUser()">
             <div class="row-fluid col-m-12">
                 <label class="col-md-6 labelLogin">{{'EMAIL' | translate}}: </label>
                 <input ng-required="true" class="col-md-6" maxlength="100" type="text" placeholder="{{'NEMAILATT' |translate}}" ng-model="gebruiker.nieuwegebruiker"/>
