@@ -106,7 +106,7 @@ angular.module('attentiaPronostiekApp')
 
                 if(gemaaktepronostiek.length > 0)
                 {
-                    $scope.gekozenLand = gemaaktepronostiek[0].attributes.land;
+                    $scope.gekozenLand = landen[gemaaktepronostiek[0].attributes.land].landNaam;
                     var vulGroep = {};
                     $translate('VORIGE_PRONOSTIEKEN').then(function (translation) { vulGroep.naam = translation });
                     vulGroep.groep= [];
