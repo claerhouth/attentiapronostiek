@@ -13,7 +13,7 @@
 
 
 
-<form name="pronostiek" ng-submit="savePronostiek()">
+<form name="pronostiek">
 
     <div class="centerdiv">
         <div class="row-fluid col-md-12 ">
@@ -54,7 +54,7 @@
 
         <div class="row-fluid col-md12">
             <label class="col-md-3"></label>
-            <button type="submit" class="btn btn-default col-md-6 wkbutton" ng-show="showButton" ng-disabled="pronostiek.$invalid" >{{'PRONOSTIEK_OPSLAAN' | translate}}</button>
+            <button ng-click=savePronostiek() class="btn btn-default col-md-6 wkbutton" ng-show="showButton" ng-disabled="pronostiek.$invalid" >{{'PRONOSTIEK_OPSLAAN' | translate}}</button>
             <label class="col-md-3"></label>
         </div>
     </div>
