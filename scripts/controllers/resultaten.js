@@ -16,8 +16,9 @@ angular.module('attentiaPronostiekApp')
         $scope.initResultaat = function(resultaat)
         {
             $scope.gebruikersPunten = resultaat.punten;
-            $scope.buScores = resultaat.buScores;
-            $scope.userScores = resultaat.userScores;
+            $scope.buScores = resultaat.buScores.sort(function (a, b) { return (a.score > b.score) ? 1 : (b.score > a.score) ? -1 : 0 });
+            $scope.userScores = resultaat.userScores.sort(function (a, b) { return (a.punten > b.punten) ? 1 : (b.punten > a.punten) ? -1 : 0 });
+
         };
 
         arango.getGebruikersPunten(authent.authenticatedUser().gebruikersnaam).then(function(result) {$scope.initResultaat(result)});
