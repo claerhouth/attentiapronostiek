@@ -16,8 +16,8 @@ angular.module('attentiaPronostiekApp')
         $scope.initResultaat = function(resultaat)
         {
             $scope.gebruikersPunten = resultaat.punten;
-            $scope.buScores = resultaat.buScores.sort(function (a, b) { return (a.score > b.score) ? 1 : (b.score > a.score) ? -1 : 0 });
-            $scope.userScores = resultaat.userScores.sort(function (a, b) { return (a.punten > b.punten) ? 1 : (b.punten > a.punten) ? -1 : 0 });
+            $scope.buScores = resultaat.buScores.sort(function (a, b) { return (a.score < b.score) ? 1 : (b.score < a.score) ? -1 : 0 });
+            $scope.userScores = resultaat.userScores.sort(function (a, b) { return (a.punten < b.punten) ? 1 : (b.punten < a.punten) ? -1 : 0 });
 
         };
 
