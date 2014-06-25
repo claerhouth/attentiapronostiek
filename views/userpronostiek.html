@@ -48,7 +48,6 @@
 
         <div class="row-fluid col-md12">
             <label class="col-md6">{{'WIEWINT' | translate}}</label>
-            <select class="col-md6" ng-model="gekozenLand" ng-required="true" ng-show="showButton" ng-options="land.landId as land.landNaam | translate for land in landen"> </select>
             <label class="col-md6" ng-hide="showButton">{{gekozenLand}}</label>
         </div>
 
