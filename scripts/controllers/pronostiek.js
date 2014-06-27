@@ -163,7 +163,7 @@ angular.module('attentiaPronostiekApp')
                 }
                 else
                 {
-                  pronostiek.land = 29;
+                  pronostiek.land = 99;
                 }
                 
                 
