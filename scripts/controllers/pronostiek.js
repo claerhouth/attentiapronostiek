@@ -157,7 +157,16 @@ angular.module('attentiaPronostiekApp')
             {
                 var pronostiek = {};
 
-                pronostiek.land = $scope.gekozenLand;
+                if($scope.gekozenLand)
+                {
+                  pronostiek.land = $scope.gekozenLand;
+                }
+                else
+                {
+                  pronostiek.land = 29;
+                }
+                
+                
                 console.log(pronostiek.land);
                 pronostiek.matchResultaat = [];
                 pronostiek.gebruikersnaam = authent.authenticatedUser().gebruikersnaam;
